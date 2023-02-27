@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WhackAMole_SW.MainPage">
+
+    <!-- Note to self, GET REFERENCES FOR IMAGES -->
+
+    <!-- Image Ref for all moles: https://opengameart.org/content/cyberspace-sprites -->
+
+    <Grid x:Name="OverallContentGrid"  Background="codewall.jpg" HeightRequest="700" WidthRequest="400">
+
+        <!-- Image Ref: https://www.wallpaperflare.com/action-adventure-binary-code-computer-cyber-cyberpunk-wallpaper-ppmyk -->
+        <Image Source="codewall.jpg" Aspect="AspectFill" Opacity="0.6" HeightRequest="700" WidthRequest="800"/>
+
+        <!-- Stack Layout for introduction and gameover message -->
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Label x:Name="LblWelcome" Text="WELCOME TO CODE-BREAKER! &#x0a;BREAK NODES TO EARN POINTS BUT WATCH OUT FOR BLOCKERS, THEY'LL REDUCE POINTS EARNED. &#x0a;READY TO PLAY?"
+                   TextColor="OrangeRed" HorizontalTextAlignment="Center" WidthRequest="400"/>
+            <Button x:Name="BtnDismissWelcome" Text="Ready!" BackgroundColor="Black" TextColor="OrangeRed" Margin="5" HorizontalOptions="Center" IsVisible="True"
+                    Clicked ="BtnDismissWelcome_Clicked"/>
+            <Image x:Name="Gameover" Source="gameover.png" HeightRequest="400" WidthRequest="250" IsVisible="False"/>
+        </StackLayout>
+
+        <VerticalStackLayout>
+            <Frame HorizontalOptions="End" CornerRadius="10">
+                <Grid BackgroundColor="Black">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Grid displaying Score and countdown timer -->
+                    <Label Text="Score" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center" FontSize="Small" TextColor="Blue" FontAttributes="Bold" Margin="1, 2, 1, 2"/>
+                    <Label Text="Time" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center" FontSize="Small" TextColor="Wheat" FontAttributes="Bold" Margin="2, 2, 1, 2"/>
+                    <Label x:Name="LblScore" Text="0"  Grid.Column="0" Grid.Row="1" HorizontalOptions="Center" TextColor="White" FontSize="Small" Margin="1, 2, 2, 2"/>
+                    <Label x:Name="LblCounter" Text="0" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" FontSize="Small" Margin="1,2,2,2" />
+                </Grid>
+            </Frame>
+            
+            <!-- 3x3 game grid -->
+            <Grid x:Name="GameGrid3x3" IsVisible="True"
+                            HorizontalOptions="Center" VerticalOptions="Center"
+                            HeightRequest="500" WidthRequest="500" RowSpacing="40" ColumnSpacing="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Image Buttons for my moles, titled Nodes and Blockers respectively -->
+                <ImageButton x:Name="node3_1st" Source="node.png" IsVisible="False" 
+                             Grid.Row="1" Grid.Column="0"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="80" WidthRequest="80"
+                             Clicked="Node_Clicked" />
+
+                <ImageButton x:Name="node3_2nd" Source="node.png" IsVisible="False"
+                             Grid.Row="2" Grid.Column="2"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="80" WidthRequest="80"
+                             Clicked="Node_Clicked" />
+
+                <ImageButton x:Name="block3_1st" Source="blocker.png" IsVisible="False"
+                             Grid.Row="1" Grid.Column="0"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="80" WidthRequest="80"
+                             Clicked="Blocker_Clicked" />
+
+                <ImageButton x:Name="block3_2nd" Source="blocker.png" IsVisible="False"
+                             Grid.Row="1" Grid.Column="0"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="80" WidthRequest="80"
+                             Clicked="Blocker_Clicked" />
+
+                <ImageButton x:Name="block3_3rd" Source="blocker.png" IsVisible="False"
+                             Grid.Row="1" Grid.Column="0"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="80" WidthRequest="80"
+                             Clicked="Blocker_Clicked" />
+
+
+
+
+            </Grid>
+
+            <!-- 5x5 game grid -->
+            <Grid x:Name="GameGrid5x5" 
+                            IsVisible="False"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HeightRequest="500" WidthRequest="400" RowSpacing="40" ColumnSpacing="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Image Buttons for my moles, titled Nodes and Blockers respectively -->
+                <ImageButton x:Name ="node5_1st" Source="node.png" IsVisible="False"
+                             Grid.Row="1" Grid.Column="0"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="60" WidthRequest="60"
+                             Clicked="Node_Clicked"/>
+
+                <ImageButton x:Name ="node5_2nd" Source="node.png" IsVisible="False"
+                             Grid.Row="4" Grid.Column="4"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="60" WidthRequest="60"
+                             Clicked="Node_Clicked"/>
+
+                <ImageButton x:Name ="block5_1st" Source="blocker.png" IsVisible="False"
+                             Grid.Row="3" Grid.Column="2"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="60" WidthRequest="60"
+                             Clicked="Blocker_Clicked"/>
+
+                <ImageButton x:Name ="block5_2nd" Source="blocker.png" IsVisible="False"
+                             Grid.Row="3" Grid.Column="2"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="60" WidthRequest="60"
+                             Clicked="Blocker_Clicked"/>
+
+                <ImageButton x:Name ="block5_3rd" Source="blocker.png" IsVisible="False"
+                             Grid.Row="3" Grid.Column="2"
+                             HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"
+                             HeightRequest="60" WidthRequest="60"
+                             Clicked="Blocker_Clicked"/>
+                
+            </Grid>
+
+            <!-- Change grid and difficulty buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button x:Name="BtnChangeGrid" Text="5 x 5" BackgroundColor="Black" TextColor="OrangeRed" Margin="5" HorizontalOptions="Center"
+                    Clicked="BtnChangeGrid_Clicked" />
+
+                <Button x:Name="BtnLevel" Text="Easy" Margin="5" BackgroundColor="Black" TextColor="OrangeRed" HorizontalOptions="Center"
+                    Clicked="BtnLevel_Clicked"/>
+            </HorizontalStackLayout>
+
+            <!-- Start game button -->
+                <Button x:Name="BtnStart" Text="Start" Margin="5" BackgroundColor="Black" TextColor="OrangeRed" HorizontalOptions="Center"
+                Clicked="BtnStart_Clicked" />
+
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
